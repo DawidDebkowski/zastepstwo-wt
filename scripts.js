@@ -15,6 +15,9 @@ function toggleVideo() {
         }
 }
 
+progress.addEventListener("click", function(e){
+    video.currentTime = e.offsetX / progress.offsetWidth * video.duration;
+});
 toggle.addEventListener("click", toggleVideo);
 video.addEventListener("click", toggleVideo);
 video.addEventListener("timeupdate", function(){
