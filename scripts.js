@@ -17,3 +17,6 @@ function toggleVideo() {
 
 toggle.addEventListener("click", toggleVideo);
 video.addEventListener("click", toggleVideo);
+video.addEventListener("timeupdate", function(){
+    progressBar.style.flexBasis = video.currentTime / video.duration * 100 + "%";
+});
