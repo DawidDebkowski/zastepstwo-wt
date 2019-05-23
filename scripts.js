@@ -1,6 +1,6 @@
 const player = document.querySelector('.player');
 const video = player.querySelector('.viewer');
-const progress = player.querySelector('.progress');
+const progress = player.querySelector('.progress');``
 const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const ranges = player.querySelectorAll('.player__slider');
@@ -14,20 +14,24 @@ function toggleVideo() {
         video.pause();
     }
 }
+function skip(skipTime) {
+    video.currentTime = video.currentTime + Number(skipTime);
+}
+
+toggle.addEventListener("click", toggleVideo);
+video.addEventListener("click", toggleVideo);
+
+skipButtons.forEach( b => {
+    b.addEventListener("click", (event) => {
+        const button = event.target; // nasz button
+        let skipTime = button.dataset.skip;
+        skip(skipTime)
+    })
+})
 
 progress.addEventListener("click", function (e) {
     video.currentTime = e.offsetX / progress.offsetWidth * video.duration;
 });
-// sprawdzenie czy mysza jest juz nie na pasku
-
-// progress.addEventListener("mousemove", function (e) {
-//     if (e.mousedown){
-//     video.currentTime = e.offsetX / progress.offsetWidth * video.duration;}
-// });
-
-toggle.addEventListener("click", toggleVideo);
-
-video.addEventListener("click", toggleVideo);
 
 video.addEventListener("timeupdate", function () {
     progressBar.style.flexBasis = video.currentTime / video.duration * 100 + "%";
@@ -40,3 +44,5 @@ ranges.forEach(range => {
     range.addEventListener("change",setValue);
     range.addEventListener("mousemove", setValue);
 })
+
+
