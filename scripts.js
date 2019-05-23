@@ -5,6 +5,27 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const ranges = player.querySelectorAll('.player__slider');
 const skipButtons = player.querySelectorAll('[data-skip]');
+const fullscreen = player.querySelector(".fullscreen")
+
+// console.log(fullscreen)
+//fullscreen.addEventListener("click", ()=>player.requestFullscreen())
+
+function isFullscreen(){
+    return !!document.fullscreenElement;
+}
+function toggleFullscreen(){
+    if(isFullscreen()){
+        document.exitFullscreen();
+    }
+    else{
+        player.requestFullscreen();
+    }
+}
+player.addEventListener("fullscreenchange", updateFullscreen)
+fullscreen.addEventListener("click", toggleFullscreen)
+function updateFullscreen(){
+    fullscreen.innerText = isFullscreen() ? "><" : "<>";
+}
 
 function toggleVideo() {
     if (video.paused) {
